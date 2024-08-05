@@ -16,15 +16,3 @@ Welcome to the Task Reminder System! This handy app sends you email reminders fo
 4. **Send Email Reminders**: Send an email reminder for each task that's due.
 5. **User Notification**: Show a message box letting you know reminders have been sent.
 
-## How It Works
-
-### Import Libraries
-First, we bring in the libraries we need:
-```python
-import requests
-import smtplib
-from datetime import datetime
-import tkinter as tk
-from tkinter import messagebox
-
-
