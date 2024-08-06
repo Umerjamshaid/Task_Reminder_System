@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import messagebox 
 
 # Sheety API URL
-SHEETY_API_URL = 'https://api.sheety.co/347a860d7c6079a6e6250616420962dc/taskReminderSystemExpanded/taskReminderSystemExpandedCsv'
+SHEETY_API_URL = 'sheety api'
 
 # Function to fetch tasks from Google Sheet
 def fetch_tasks():
@@ -44,12 +44,11 @@ def run_task_reminders():
 # making a GUI
 def create_gui():
     root = tk.Tk()
-
+#Size of the window
     root.geometry("400x300")
 
     guilable = tk.Label(root, text="Task Reminder System", font=("Arial", 16))
     guilable.pack()
-
 # creating a button
     button = tk.Button(root, text="Run Task Reminders", command=run_task_reminders, font=("Arial", 14), fg="gray", bg="black")
     button.pack()
