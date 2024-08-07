@@ -2,7 +2,7 @@ import requests
 import smtplib
 from datetime import datetime
 import tkinter as tk 
-from tkinter import messagebox 
+from tkinter import messagebox
 
 # Sheety API URL
 SHEETY_API_URL = 'https://api.sheety.co/347a860d7c6079a6e6250616420962dc/taskReminderSystemExpanded/taskReminderSystemExpandedCsv'
@@ -11,7 +11,7 @@ SHEETY_API_URL = 'https://api.sheety.co/347a860d7c6079a6e6250616420962dc/taskRem
 def fetch_tasks():
     response = requests.get(SHEETY_API_URL)
     if response.status_code == 200:
-        return response.json().get('sheet1', [])
+        return response.json().get('taskReminderSystemExpanded', [])
     else:
         print("Failed to fetch tasks:", response.text)
         return []
@@ -36,28 +36,30 @@ def run_task_reminders():
     tasks = fetch_tasks()
     today = datetime.today().strftime('%Y-%m-%d')
     
-    for task in tasks:
-        if task['DueDate'] == today:
+    tasks_due_today = [task for task in tasks if task['DueDate'] == today]
+
+    if tasks_due_today:
+        for task in tasks_due_today:
             send_email(task['Email'], task['Task'], task['DueDate'])
-            messagebox.showinfo("Task Reminder", "Reminders sent for today's tasks!")
-        else:
-            messagebox.showinfo("No tasks due today:")
-# making a GUI
+        messagebox.showinfo("Task Reminder", "Reminders sent for today's tasks!")
+    else:
+        messagebox.showinfo("Task Reminder", "No tasks due today.")
+
+# Create the GUI
 def create_gui():
     root = tk.Tk()
-
     root.geometry("400x300")
+    root.title("Task Reminder System")
 
-    guilable = tk.Label(root, text="Task Reminder System", font=("Arial", 16))
-    guilable.pack()
+    guilabel = tk.Label(root, text="Task Reminder System", font=("Arial", 16))
+    guilabel.pack()
 
-# creating a button
+    # Create a button
     button = tk.Button(root, text="Run Task Reminders", command=run_task_reminders, font=("Arial", 14), fg="gray", bg="black")
     button.pack()
 
+    root.mainloop()
 
-
-    guilable.mainloop()
-# # Run the GUI
+# Run the GUI
 if __name__ == "__main__":
     create_gui()
