@@ -46,10 +46,10 @@ def run_task_reminders():
         messagebox.showinfo("Task Reminder", "No tasks due today.")
 
 # Create the GUI
+root = tk.Tk()
+root.geometry("400x300")
+root.title("Task Reminder System")
 def create_gui():
-    root = tk.Tk()
-    root.geometry("400x300")
-    root.title("Task Reminder System")
 
     guilabel = tk.Label(root, text="Task Reminder System", font=("Arial", 16))
     guilabel.pack()
